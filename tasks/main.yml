@@ -2,7 +2,7 @@
 # tasks file for ansible-role-docker-registrator
 
 - fail: "msg=\"This role requires shelleg context - read more at http:// url to docs\""
-  when: "shelleg is undefined or shelleg_hosts is undefined"
+  when: "shelleg is undefined or hosts is undefined"
 
 - include: docker-reqs.yml
 
@@ -13,7 +13,7 @@
     consul_port: "{{ consul_port | d('8500') }}"
   when: ("{{ item.consul_leader }}" == "true")
   with_items:
-  - "{{ shelleg_hosts.infra }}"
+  - "{{ hosts.infra }}"
 
 - debug:
     var: consul_leader_hostname
